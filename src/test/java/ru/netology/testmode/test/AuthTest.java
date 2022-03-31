@@ -2,6 +2,7 @@ package ru.netology.testmode.test;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -57,7 +58,7 @@ public class AuthTest { // java -jar artifacts/app-ibank.jar -P:profile=test
     @Test
     @DisplayName("Should get error message if login with blocked registered user")
     void shouldGetErrorIfBlockedUser() {
-        var blockedUser = getRegisteredUser("active");
+        var blockedUser = getRegisteredUser("blocked");
         PageLogin.login(blockedUser.getLogin(), blockedUser.getPassword());
         $("[data-test-id=error-notification] .notification__content").should(appear).shouldHave(text("Пользователь заблокирован"));
     }
